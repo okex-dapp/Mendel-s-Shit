@@ -5,6 +5,11 @@
     <meta charset="utf-8" />
     <title>Mendel's Shit</title>
 </head>
+
+
+<body>
+    <button type="button" onclick="connect">Click Me!</button>
+</body>
 <script>
     /**********************************************************/
     /* Handle chain (network) and chainChanged (per EIP-1193) */
@@ -60,7 +65,6 @@
     // Otherwise, you popup-spam the user like it's 1999.
     // If you fail to retrieve the user's account(s), you should encourage the user
     // to initiate the attempt.
-    document.getElementById('connectButton', connect);
 
     function connect() {
         ethereum
@@ -78,9 +82,4 @@
     }
 
 </script>
-
-<body>
-    <button type="button" id="connectButton">Click Me!</button>
-</body>
-
 </html>
