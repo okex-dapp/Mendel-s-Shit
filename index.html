@@ -51,9 +51,36 @@
             // Do any other work!
         }
     }
+    /*********************************************/
+    /* Access the user's accounts (per EIP-1102) */
+    /*********************************************/
+
+    // You should only attempt to request the user's accounts in response to user
+    // interaction, such as a button click.
+    // Otherwise, you popup-spam the user like it's 1999.
+    // If you fail to retrieve the user's account(s), you should encourage the user
+    // to initiate the attempt.
+    document.getElementById('connectButton', connect);
+
+    function connect() {
+        ethereum
+            .request({ method: 'eth_requestAccounts' })
+            .then(handleAccountsChanged)
+            .catch((err) => {
+                if (err.code === 4001) {
+                    // EIP-1193 userRejectedRequest error
+                    // If this happens, the user rejected the connection request.
+                    console.log('Please connect to Metamask Wallet.');
+                } else {
+                    console.error(err);
+                }
+            });
+    }
 
 </script>
 
-<body></body>
+<body>
+    <button type="button" id="connectButton">Click Me!</button>
+</body>
 
 </html>
