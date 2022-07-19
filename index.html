@@ -95,7 +95,17 @@
         "event Transfer(address indexed from, address indexed to, uint amount)"
     ];
     let contractAddress = "0xb07E7D5124cBAfdB8C17d56D53A23250b576Df2F";
-    provider = new ethers.providers.Web3Provider(ethereum)
+    let provider = new ethers.providers.Web3Provider(ethereum)
     const Contract = new ethers.Contract(contractAddress, abi, provider);
+
+    Contract.on("Transfer", (to, amount, from) => {
+        console.log(to, amount, from);
+    });
+
+    let cB = await provider.getBlockNumber();
+    console.log(await Contract.queryFilter(filterFrom, cB - 2000, cB));
+
+
 </script>
+
 </html>
