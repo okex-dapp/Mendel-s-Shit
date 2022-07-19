@@ -103,7 +103,11 @@
     });
 
     console.log(Contract.symbol());
-    let cB = await provider.getBlockNumber();
+    async function getBlockNumber() {
+        let cB = await provider.getBlockNumber();
+        return cB;
+    }
+    let cB = getBlockNumber();
     let filterFrom  = Contract.filters.Transfer('0x56a9C6A4154566840f7EdF8519Bc251B18aE5BFd');
     console.log(await Contract.queryFilter(filterFrom, cB - 2000, cB));
 
