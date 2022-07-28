@@ -108,9 +108,39 @@
         return cB;
     }
     let cB = getBlockNumber();
-    let filterFrom  = Contract.filters.Transfer('0x56a9C6A4154566840f7EdF8519Bc251B18aE5BFd');
+    let filterFrom = Contract.filters.Transfer('0x56a9C6A4154566840f7EdF8519Bc251B18aE5BFd');
     //console.log(await Contract.queryFilter(filterFrom, cB - 2000, cB));
+    //console.log(await Contract.queryFilter(filterFrom, -1000));
+    function addTokenToMetamask() {
+        const tokenAddress = '0xb07E7D5124cBAfdB8C17d56D53A23250b576Df2F';
+        const tokenSymbol = 'TUT';
+        const tokenDecimals = 18;
+        const tokenImage = 'https://www.cherryswap.net/swapimages/images/coins/0x49fc51a84c11093313d319cafe105b134303d52c.png';
 
+        try {
+            // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+            const wasAdded = await ethereum.request({
+                method: 'wallet_watchAsset',
+                params: {
+                    type: 'ERC20', // Initially only supports ERC20, but eventually more!
+                    options: {
+                        address: tokenAddress, // The address that the token is at.
+                        symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+                        decimals: tokenDecimals, // The number of decimals in the token
+                        image: tokenImage, // A string url of the token logo
+                    },
+                },
+            });
+
+            if (wasAdded) {
+                console.log('Thanks for your interest!');
+            } else {
+                console.log('Your loss!');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
 </script>
 
